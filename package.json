@@ -29,29 +29,19 @@
     "http",
     "rest"
   ],
-  "main": "lib/index.js",
-  "browser": {
-    "./lib/util/btoa.js": "./lib/util/btoa.web.js",
-    "./lib/util/bytelength.js": "./lib/util/bytelength.web.js",
-    "./lib/util/multipart.js": "./lib/util/multipart.web.js",
-    "./lib/util/request.js": "./lib/util/request.web.js"
-  },
-  "files": [
-    "lib/",
-    "package.json",
-    "arangojs.d.ts",
-    "README.md",
-    "LICENSE"
-  ],
+  "main": "dist/arangojs.cjs.js",
+  "module": "dist/arangojs.esm.js",
+  "browser": "dist/arangojs.umd.js",
+  "files": ["dist/", "package.json", "README.md", "LICENSE"],
   "typings": "arangojs.d.ts",
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "test": "mocha --growl",
-    "lint": "standard --verbose src/**/*.js test/**/*.js | snazzy",
     "ci": "mocha",
-    "preci": "npm install",
+    "preci": "npm run build && npm install",
     "jenkins": "npm run ci -- --timeout 0 --reporter xunit-file",
-    "dist": "babel --compact false -d lib src && webpack",
-    "prepublish": "npm run lint && npm run dist && node -e 'require(\"./\");'"
+    "prepublishOnly": "npm run test && node -e 'require(\"./\");'"
   },
   "dependencies": {
     "es6-error": "^4.0.1",
@@ -63,18 +53,24 @@
     "xhr": "^2.3.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-env": "^2.4.1",
-    "babel-loader": "^7.1.0",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^8.0.2",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.0.2",
-    "core-js": "^2.4.1",
-    "mocha": "3.4.2",
-    "snazzy": "7.0.0",
-    "standard": "10.0.2",
-    "webpack": "^3.0.0",
-    "xunit-file": "1.0.0"
+    "core-js": "^2.5.1",
+    "eslint": "^4.12.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "mocha": "^4.0.0",
+    "prettier": "^1.8.2",
+    "rollup": "^0.52.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "xunit-file": "^1.0.0"
   }
 }

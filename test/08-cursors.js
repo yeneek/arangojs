@@ -1,6 +1,6 @@
 import { before, beforeEach, describe, it } from "mocha";
 
-import { Database } from "../src";
+import { Database } from "..";
 import { expect } from "chai";
 
 const aqlQuery = "FOR i In 0..10 RETURN i";

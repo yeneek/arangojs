@@ -5,46 +5,54 @@ import json from "rollup-plugin-json";
 import pkg from "./package.json";
 import resolve from "rollup-plugin-node-resolve";
 
+const nodeExternals = [
+  "es6-error",
+  "http",
+  "http-errors",
+  "https",
+  "linkedlist",
+  "multi-part",
+  "path",
+  "querystring",
+  "retry",
+  "stream",
+  "url",
+  "utf8-length",
+  "xhr"
+];
+
+const babelNodeCfg = {
+  exclude: ["node_modules/**"],
+  plugins: ["transform-object-rest-spread", "external-helpers"],
+  presets: [
+    [
+      "env",
+      {
+        targets: {
+          node: "6"
+        },
+        modules: false
+      }
+    ]
+  ]
+};
+
 export default [
   {
-    input: "src/index.js",
-    external: [
-      "es6-error",
-      "http-errors",
-      "linkedlist",
-      "multi-part",
-      "retry",
-      "utf8-length",
-      "xhr"
-    ],
-    output: [
-      { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "es" }
-    ],
-    plugins: [
-      babel({
-        exclude: ["node_modules/**"],
-        plugins: ["transform-object-rest-spread", "external-helpers"],
-        presets: [
-          [
-            "env",
-            {
-              targets: {
-                node: "6"
-              },
-              modules: false
-            }
-          ]
-        ]
-      })
-    ]
+    input: "src/index.cjs.js",
+    external: nodeExternals,
+    output: { file: pkg.main, format: "cjs" },
+    plugins: [babel(babelNodeCfg)]
   },
   {
     input: "src/index.js",
-    output: {
-      file: pkg.browser,
-      format: "umd"
-    },
+    external: nodeExternals,
+    output: { file: pkg.module, format: "es" },
+    plugins: [babel(babelNodeCfg)]
+  },
+  {
+    input: "src/index.cjs.js",
+    output: { file: pkg.browser, format: "umd" },
     name: "arangojs",
     plugins: [
       babel({
@@ -68,7 +76,10 @@ export default [
         ]
       }),
       json({ preferConst: true }),
-      resolve({ extensions: [".web.js", ".js", ".json"] }),
+      resolve({
+        extensions: [".web.js", ".js", ".json"],
+        preferBuiltins: true
+      }),
       builtins(),
       commonjs()
     ]

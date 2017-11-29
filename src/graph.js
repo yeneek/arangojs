@@ -1,8 +1,4 @@
-import {
-  _BaseCollection as BaseCollection,
-  EdgeCollection,
-  _types as types
-} from "./collection";
+import { BaseCollection, EdgeCollection, types } from "./collection";
 
 class GraphVertexCollection extends BaseCollection {
   constructor(connection, name, graph) {

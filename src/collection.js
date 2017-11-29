@@ -5,7 +5,7 @@ export const types = {
   EDGE_COLLECTION: 3
 };
 
-class BaseCollection {
+export class BaseCollection {
   constructor(connection, name) {
     this.name = name;
     this._urlPrefix = `/collection/${name}/`;
@@ -632,7 +632,7 @@ class BaseCollection {
 
 BaseCollection.prototype.isArangoCollection = true;
 
-class DocumentCollection extends BaseCollection {
+export class DocumentCollection extends BaseCollection {
   constructor(...args) {
     super(...args);
     this.type = types.DOCUMENT_COLLECTION;
@@ -683,7 +683,7 @@ class DocumentCollection extends BaseCollection {
   }
 }
 
-class EdgeCollection extends BaseCollection {
+export class EdgeCollection extends BaseCollection {
   constructor(...args) {
     super(...args);
     this.type = types.EDGE_COLLECTION;
@@ -778,10 +778,3 @@ export default function construct(connection, body) {
     body.type === types.EDGE_COLLECTION ? EdgeCollection : DocumentCollection;
   return new Collection(connection, body.name);
 }
-
-export {
-  EdgeCollection,
-  DocumentCollection,
-  BaseCollection as _BaseCollection,
-  types as _types
-};

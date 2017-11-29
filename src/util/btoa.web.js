@@ -1,1 +1,1 @@
-export default window.btoa;
+export default global.btoa;

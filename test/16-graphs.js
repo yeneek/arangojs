@@ -1,6 +1,6 @@
 import { after, afterEach, before, beforeEach, describe, it } from "mocha";
 
-import { Database } from "../src";
+import { Database } from "..";
 import { expect } from "chai";
 
 const range = n => Array.from(Array(n).keys());

@@ -687,7 +687,7 @@ export default class Database {
       "/foxx/commit",
       undefined,
       { replace },
-      (err, res) => (err ? callback(err) : callback(null))
+      err => (err ? callback(err) : callback(null))
     );
     return promise;
   }

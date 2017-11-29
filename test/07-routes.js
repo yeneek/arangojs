@@ -1,7 +1,6 @@
+import { Database, Route } from "..";
 import { describe, it } from "mocha";
 
-import { Database } from "../src";
-import Route from "../src/route";
 import { expect } from "chai";
 
 describe("Arbitrary HTTP routes", () => {

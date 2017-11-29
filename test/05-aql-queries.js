@@ -1,7 +1,6 @@
-import { Database, aqlQuery } from "../src";
+import { ArrayCursor, Database, aql as aqlQuery } from "..";
 import { after, before, describe, it } from "mocha";
 
-import Cursor from "../src/cursor";
 import { expect } from "chai";
 
 describe("AQL queries", () => {
@@ -32,7 +31,7 @@ describe("AQL queries", () => {
       db
         .query("RETURN 23")
         .then(cursor => {
-          expect(cursor).to.be.an.instanceof(Cursor);
+          expect(cursor).to.be.an.instanceof(ArrayCursor);
           done();
         })
         .catch(done);

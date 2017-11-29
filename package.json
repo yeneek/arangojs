@@ -38,6 +38,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "mocha --growl",
+    "pretest": "npm run lint && npm run build",
+    "lint": "eslint src test",
     "ci": "mocha",
     "preci": "npm run build && npm install",
     "jenkins": "npm run ci -- --timeout 0 --reporter xunit-file",

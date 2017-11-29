@@ -1,7 +1,6 @@
+import { ArrayCursor, Database } from "..";
 import { after, afterEach, before, beforeEach, describe, it } from "mocha";
 
-import Cursor from "../src/cursor";
-import { Database } from "../src";
 import { expect } from "chai";
 
 const range = n => Array.from(Array(n).keys());
@@ -65,7 +64,7 @@ describe("Simple queries", () => {
       collection
         .all()
         .then(cursor => {
-          expect(cursor).to.be.an.instanceof(Cursor);
+          expect(cursor).to.be.an.instanceof(ArrayCursor);
           expect(cursor.count).to.equal(10);
           return cursor.all();
         })
@@ -141,7 +140,7 @@ describe("Simple queries", () => {
       collection
         .byExample({ group: 2 })
         .then(cursor => {
-          expect(cursor).to.be.an.instanceof(Cursor);
+          expect(cursor).to.be.an.instanceof(ArrayCursor);
           return cursor.all();
         })
         .then(arr => {

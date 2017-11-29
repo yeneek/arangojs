@@ -1,7 +1,6 @@
+import { ArangoError, Database } from "..";
 import { afterEach, beforeEach, describe, it } from "mocha";
 
-import ArangoError from "../src/error";
-import { Database } from "../src";
 import { expect } from "chai";
 
 const range = n => Array.from(Array(n).keys());

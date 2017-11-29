@@ -1,6 +1,22 @@
 import Database from "./database";
-import aqlQuery from "./aql-query";
+export default function arangojs(...args) {
+  return new Database(...args);
+}
 
-module.exports = (...args) => new Database(...args);
-module.exports.Database = Database;
-module.exports.aqlQuery = module.exports.aql = aqlQuery;
+export { default as ArangoError } from "./error";
+export { default as ArrayCursor } from "./cursor";
+export { default as Connection } from "./connection";
+export {
+  default as Graph,
+  VertexCollection as GraphVertexCollection,
+  EdgeCollection as GraphEdgeCollection
+} from "./graph";
+export { default as Route } from "./route";
+export { default as aql } from "./aql-query";
+export {
+  DocumentCollection,
+  EdgeCollection,
+  BaseCollection,
+  types
+} from "./collection";
+export { Database };

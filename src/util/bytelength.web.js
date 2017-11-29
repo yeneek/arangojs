@@ -1,1 +1,1 @@
-module.exports = require('utf8-length')
+module.exports = require("utf8-length");

@@ -1,6 +1,7 @@
-import {describe, it, before, after, beforeEach, afterEach} from 'mocha'
-import {expect} from 'chai'
+import {after, afterEach, before, beforeEach, describe, it} from 'mocha'
+
 import {Database} from '../src'
+import {expect} from 'chai'
 
 const ARANGO_VERSION = Number(process.env.ARANGO_VERSION || 30000)
 const it3x = ARANGO_VERSION >= 30000 ? it : it.skip

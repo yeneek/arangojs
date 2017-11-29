@@ -1,1 +1,2 @@
-module.exports = require("./request.node");
+export { default } from "./request.node";
+export * from "./request.node";
